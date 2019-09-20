@@ -41,8 +41,10 @@ const DiceGenerator: React.FC = () => {
     secret += getDiceList[r] + "-";
   }
 
+  secret += getRandomDice(0, 99);
+
   return (
-    <b> it works { secret }</b>
+    <b>{ secret }</b>
   );
 
 }
