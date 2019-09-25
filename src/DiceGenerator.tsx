@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const getRandomDice = (min: number, max: number) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
   // https://stackoverflow.com/questions/2509679/how-to-generate-a-random-integer-number-from-within-a-range
   let array = new Uint32Array(1);
   const range = 1 + max - min;
-  const buckets = 0xFFFFFFFF / range; // RAND_MAX / RANGE
+  const buckets = 0xffffffff / range; // RAND_MAX / RANGE
   const limit: number = buckets * range;
   let random: number = window.crypto.getRandomValues(array)[0];
   while (random >= limit) {
-    random =  window.crypto.getRandomValues(array)[0];
+    random = window.crypto.getRandomValues(array)[0];
   }
-  return Math.floor(min + (random/buckets));
-}
+  return Math.floor(min + random / buckets);
+};
 
 const DiceGenerator: React.FC = () => {
   const [getDiceList, setDiceList] = useState<any>(undefined);
 
-  
   useEffect(() => {
     const fetchlist = async () => {
       const response = await fetch("bip-0039.txt");
@@ -31,22 +30,19 @@ const DiceGenerator: React.FC = () => {
     fetchlist();
   }, []);
 
-  if(getDiceList === undefined) {
-    return (  <b>Diceware</b>);
+  if (getDiceList === undefined) {
+    return <b>Diceware</b>;
   }
 
   let secret = "";
   for (let i = 0; i <= 2; i++) {
-    let r = getRandomDice(0, getDiceList.length-1);
+    let r = getRandomDice(0, getDiceList.length - 1);
     secret += getDiceList[r] + "-";
   }
 
   secret += getRandomDice(0, 99);
 
-  return (
-    <b>{ secret }</b>
-  );
-
-}
+  return <b>{secret}</b>;
+};
 
 export default DiceGenerator;
