@@ -8,13 +8,12 @@ const App: React.FC = () => {
 
   return (
     <div>
-<article className="mw7 center ph3 ph5-ns tc br2 pv5 bg-washed-green dark-green mb5">
+<article className="mw7 center ph3 ph5-ns tc br2 pv5 bg-washed-green dark-green mb5 relative z-2">
   <h1 className="fw6 f3 f2-ns lh-title mt0 mb3">
     Friendly Password Generator.
   </h1>
   <h2 className="fw2 f4 lh-copy mt0 mb3">
-    This will change things. And we want you to be involved. This text needs to
-    be longer for testing sake.
+    Generate a password that meets most complexity requirements, whilst aiming to be memorable.
   </h2>
   <p className="fw1 f5 mt0 mb3">
     Use the below button to repeatedly generate suitable passwords..

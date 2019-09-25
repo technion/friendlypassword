@@ -5,4 +5,6 @@ canvas {
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
   object-fit: contain;
+  top: 0;
+  position: absolute;
 }
