@@ -31,7 +31,7 @@ const DiceGenerator: React.FC = () => {
   }, []);
 
   if (getDiceList === undefined) {
-    return <b>Diceware</b>;
+    return <b>Loading wordlist..</b>;
   }
 
   let secret = "";
