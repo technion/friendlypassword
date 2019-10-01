@@ -16,6 +16,14 @@ const getRandomDice = (min: number, max: number) => {
 
 const DiceGenerator: React.FC = () => {
   const [getDiceList, setDiceList] = useState<any>(undefined);
+  const numwords = () => {
+    const hash = parseInt(window.location.hash.substr(1));
+    if(hash) {
+      return hash;
+    } else {
+      return 3;
+    }
+  }
 
   useEffect(() => {
     const fetchlist = async () => {
@@ -35,7 +43,7 @@ const DiceGenerator: React.FC = () => {
   }
 
   let secret = "";
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i < numwords(); i++) {
     let r = getRandomDice(0, getDiceList.length - 1);
     secret += getDiceList[r] + "-";
   }

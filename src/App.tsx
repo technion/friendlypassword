@@ -10,7 +10,6 @@ const App: React.FC = () => {
     navigator.clipboard
       .writeText(e.target.innerText)
       .then(() => {
-        console.log("Text copied to clipboard");
       })
       .catch(err => {
         // This can happen if the user denies clipboard permissions:
