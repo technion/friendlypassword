@@ -5,6 +5,18 @@ import DiceGenerator from "./DiceGenerator";
 const App: React.FC = () => {
   // The counter is just used to force a rerender
   const [showDice, setDice] = useState({ render: false, counter: 0 });
+  const setclip = (e: any) => {
+    console.log(e.target.innerText);
+    navigator.clipboard
+      .writeText(e.target.innerText)
+      .then(() => {
+        console.log("Text copied to clipboard");
+      })
+      .catch(err => {
+        // This can happen if the user denies clipboard permissions:
+        console.error("Could not copy text: ", err);
+      });
+  };
 
   return (
     <div className="pv5">
@@ -21,13 +33,22 @@ const App: React.FC = () => {
         </p>
         <div>
           <button
-            className="f6 br-pill bg-dark-green no-underline washed-green ba b--dark-green grow pv2 ph3 dib mr3"
+            className="f6 br-pill bg-dark-green no-underline washed-green ba b--dark-green grow pv2 ph3 dib"
             onClick={() =>
               setDice(state => ({ render: true, counter: state.counter + 1 }))
             }
           >
-            {showDice.render ? <DiceGenerator /> : "Click Here"}
+            Click to Generate!
           </button>
+          <br />
+          {showDice.render && (
+            <button
+              className="f6 br-pill bg-dark-green no-underline washed-green ba b--dark-green pv2 ph3 dib mv1"
+              onClick={e => setclip(e)}
+            >
+              <DiceGenerator />
+            </button>
+          )}
         </div>
       </article>
     </div>
