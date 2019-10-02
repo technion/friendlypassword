@@ -28,7 +28,7 @@ const App: React.FC = () => {
           aiming to be memorable.
         </h2>
         <p className="fw1 f5 mt0 mb3">
-          Use the below button to repeatedly generate suitable passwords..
+          Use the below button to repeatedly generate suitable passwords. Click the generated password to copy it to clipboard.
         </p>
         <div>
           <button

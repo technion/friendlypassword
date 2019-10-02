@@ -4,3 +4,8 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; style-src unpkg.com; block-all-mixed-content
+/*.css
+  Cache-Control: public, s-max-age=604800
+/*.js
+  Cache-Control: public, s-max-age=604800
