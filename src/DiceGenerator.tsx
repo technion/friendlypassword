@@ -60,7 +60,7 @@ const DiceGenerator: React.FC = () => {
     return <b>Loading wordlist..</b>;
   }
 
-  let secret = new Array();
+  let secret = [];
   for (let i = 0; i < numwords(); i++) {
     let r = getRandomDice(0, getDiceList.length - 1);
     secret = secret.concat(getDiceList[r]);
