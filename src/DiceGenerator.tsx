@@ -32,12 +32,13 @@ const DiceGenerator: React.FC = () => {
       const signal = controller.signal;
       const timeout = setTimeout(() => controller.abort(), 2000);
       let response;
+      let wordlist;
       try {
         response = await fetch("bip-0039.txt", {signal});
         if (!response.ok) {
           throw new Error("Invalid response from server fetch");
         }
-        const wordlist = await response.text();
+        wordlist = await response.text();
       } catch(e) {
         if (e.name === 'AbortError') {
           alert("Download timed out")
