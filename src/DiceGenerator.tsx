@@ -55,7 +55,6 @@ const DiceGenerator: React.FC = () => {
 
     };
 
-    console.log("Rendered");
     fetchlist();
     return () => {
       clearTimeout(timeout);
