@@ -27,10 +27,12 @@ const DiceGenerator: React.FC = () => {
   }
 
   useEffect(() => {
+    const controller = new AbortController();
+    let timeout: NodeJS.Timeout;
     const fetchlist = async () => {
-      const controller = new AbortController();
+
       const signal = controller.signal;
-      const timeout = setTimeout(() => controller.abort(), 2000);
+      timeout = setTimeout(() => controller.abort(), 2000);
       let response;
       let wordlist;
       try {
@@ -39,10 +41,10 @@ const DiceGenerator: React.FC = () => {
           throw new Error("Invalid response from server fetch");
         }
         wordlist = await response.text();
-      } catch(e) {
+        setDiceList(Object.freeze(wordlist.trim().split("\n")));
+      } catch(e: any) { // TODO: This doesn't seem to be typable properly
         if (e.name === 'AbortError') {
-          alert("Download timed out")
-          throw new Error("Download timed out");
+          // Do nothing. This could be an unmount.
         } else {
           alert(e)
           throw new Error("Failed to fetch url:" + e)
@@ -50,23 +52,28 @@ const DiceGenerator: React.FC = () => {
       } finally {
         clearTimeout(timeout);
       }
-      setDiceList(Object.freeze(wordlist.trim().split("\n")));
+
     };
 
+    console.log("Rendered");
     fetchlist();
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+    };
   }, []);
 
   if (getDiceList === undefined) {
     return <b>Loading wordlist..</b>;
   }
 
-  let secret = [];
+  let secret: Array<string> = [];
   for (let i = 0; i < numwords(); i++) {
     let r = getRandomDice(0, getDiceList.length - 1);
     secret = secret.concat(getDiceList[r]);
   }
 
-  secret = secret.concat(getRandomDice(0, 99));
+  secret = secret.concat(getRandomDice(0, 99).toString());
 
   return <b>{secret.join("-")}</b>;
 };

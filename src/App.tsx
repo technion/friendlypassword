@@ -18,6 +18,7 @@ const App: React.FC = () => {
   };
 
   return (
+    <React.StrictMode>
     <div className="pv5">
       <article className="mw7 center ph3 ph5-ns tc br2 pv5 bg-washed-green dark-green mb5 relative z-2">
         <h1 className="fw6 f3 f2-ns lh-title mt0 mb3">
@@ -51,6 +52,7 @@ const App: React.FC = () => {
         </div>
       </article>
     </div>
+    </React.StrictMode>
   );
 };
 
