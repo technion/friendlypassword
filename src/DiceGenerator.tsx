@@ -42,8 +42,8 @@ const DiceGenerator: React.FC = () => {
         }
         wordlist = await response.text();
         setDiceList(Object.freeze(wordlist.trim().split("\n")));
-      } catch(e: any) { // TODO: This doesn't seem to be typable properly
-        if (e.name === 'AbortError') {
+      } catch(e: unknown) {
+        if ((e instanceof Error) && e.name === 'AbortError') {
           // Do nothing. This could be an unmount.
         } else {
           alert(e)
